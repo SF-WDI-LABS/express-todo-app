@@ -12,10 +12,10 @@ var fetcher = (function(request, q) {
   // if the request takes too long or is in the wrong format.
 
   return {
-    get:  function(action      ){ return fetch("get",   {url: action})             },
-    del:  function(action      ){ return fetch("del",   {url: action})             },
-    post: function(action, data){ return fetch("post",  {url: action, form: data}) },
-    put:  function(action, data){ return fetch("put",   {url: action, form: data}) }
+    get:  function(action      ){ return fetch("get",   {url: action});             },
+    del:  function(action      ){ return fetch("del",   {url: action});             },
+    post: function(action, data){ return fetch("post",  {url: action, form: data}); },
+    put:  function(action, data){ return fetch("put",   {url: action, form: data}); }
   };
 
   ////
@@ -27,7 +27,7 @@ var fetcher = (function(request, q) {
       // Intended to be more intelligible to students than mocha's stock error of
       //    "Error: timeout of 2000ms exceeded. /
       //     Ensure the done() callback is being called in this test."
-      deferred.reject(new Error("No Response From Server"))
+      deferred.reject(new Error("No Response From Server"));
     }, TIMEOUT);
 
     request[method](options, function(error, response){
@@ -39,7 +39,7 @@ var fetcher = (function(request, q) {
         response.json = JSON.parse(response.body);
         deferred.resolve(response);
       } catch (e) {
-        deferred.reject(new Error("Response body is the " + typeof(response.body) + " \"" + response.body.toString() + "\" and not valid JSON"))
+        deferred.reject(new Error("Response body is the " + typeof(response.body) + " \"" + response.body.toString() + "\" and not valid JSON"));
       }
     });
 
@@ -47,7 +47,7 @@ var fetcher = (function(request, q) {
     return deferred.promise;
   }
 
-}(request, Q))
+}(request, Q));
 
 
 
@@ -63,17 +63,17 @@ TodoModel.prototype.loadAll = function (){
     .get(base_url + '/api/todos')
     .then(function(response){
       var all_todos = response.json.todos;
-      self.all = all_todos
-      self.last = _.last(all_todos)
-      self.random = _.sample(all_todos)
+      self.all = all_todos;
+      self.last = _.last(all_todos);
+      self.random = _.sample(all_todos);
       deferred.resolve(self);
     })
     .fail(
       deferred.reject
-    )
+    );
 
   return deferred.promise;
-}
+};
 
 
 /*
@@ -128,7 +128,7 @@ describe('Todos API', function() {
       fetcher
         .get(base_url + '/api/todos')
         .then(function (response) {
-          var first_todo = response.json.todos[0]
+          var first_todo = response.json.todos[0];
 
           expect(first_todo)
             .to.have.property("task")
@@ -152,7 +152,7 @@ describe('Todos API', function() {
   describe('GET /api/todos/:id (show)', function(){
 
     var actual_response = {};
-    var Todo = new TodoModel;
+    var Todo = new TodoModel();
 
     before(function(done){
       Todo.loadAll()
@@ -199,7 +199,7 @@ describe('Todos API', function() {
   describe('POST /api/todos (create)', function(){
 
     var actual_response = {};
-    var Todo = new TodoModel;
+    var Todo = new TodoModel();
     var new_todo = {
       task: 'Create random task name #' + Math.random,
       description: 'Pick a random number, e.g. ' + Math.random
@@ -214,7 +214,7 @@ describe('Todos API', function() {
             done();
         })
         .fail(done);
-    })
+    });
 
 
     it('should respond with status 200 - Success', function (done) {
@@ -259,15 +259,15 @@ describe('Todos API', function() {
             done();
           }
         )
-        .fail(done)
+        .fail(done);
     });
 
   });
 
   describe('DELETE /api/todos/:id (destroy)', function(){
 
-    var actual_response = {}
-    var Todo = new TodoModel;
+    var actual_response = {};
+    var Todo = new TodoModel();
 
     before(function(done){
       Todo.loadAll()
@@ -279,9 +279,9 @@ describe('Todos API', function() {
               actual_response.json = response.json;
               done();
             })
-            .fail(done)
+            .fail(done);
         })
-        .fail(done)
+        .fail(done);
     });
 
     it('should respond with 200 or 204 on success', function(done) {
@@ -300,7 +300,7 @@ describe('Todos API', function() {
 
           done();
         })
-      .fail(done)
+      .fail(done);
     });
   });
 
@@ -308,7 +308,7 @@ describe('Todos API', function() {
   describe('PUT /api/todos/:id (update)', function(){
 
     var actual_response = {};
-    var Todo = new TodoModel;
+    var Todo = new TodoModel();
     var updated_todo = {
       task: 'Return order #' + Math.random,
       description: 'Shipping label #' + Math.random
@@ -362,8 +362,8 @@ describe('Todos API', function() {
   describe('GET /api/todos/search (search)', function(){
 
     var actual_response = {};
-    var Todo = new TodoModel;
-    var search_word = _.sample(["surf", "sperlunk", "ski"])
+    var Todo = new TodoModel();
+    var search_word = _.sample(["surf", "sperlunk", "ski"]);
     var updated_todo = {
       task: search_word,
       description: 'dude... ' + Math.random
@@ -378,9 +378,9 @@ describe('Todos API', function() {
               Todo.original_todo = response.json;
               done();
             })
-            .fail(done)
+            .fail(done);
         })
-        .fail(done)
+        .fail(done);
     });
 
     it('should list all todos that contain the search term from the query parameter (e.g. `?q=discover`) in the task field', function(done){
