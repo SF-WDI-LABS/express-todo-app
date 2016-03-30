@@ -74,7 +74,7 @@ By the end of this assignment you'll hopefully see this glorious output:
        PUT /api/todos/:id (update)
          ✓ should respond with status 200 - Success
          ✓ should respond with JSON
-         ✓ should update the properities of one specific todo
+         ✓ should update the properties of one specific todo
        GET /api/todos/search (search)
          ✓ should list all todos that contain the search term from the query parameter (e.g. `?q=discover`) in the task field
 

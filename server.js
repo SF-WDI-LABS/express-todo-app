@@ -73,13 +73,11 @@ app.get('/api/todos/:id', function show(req, res) {
    * id specified in the route parameter (:id)
    */
    var intId = parseInt(req.params.id);
-   var correct;
    todos.forEach(function (item) {
      if ( item._id === intId){
-        correct = item;
-
+        res.status(200).json(item);
      }
-     res.status(200).json(correct);
+
   });
 
 
@@ -90,7 +88,17 @@ app.put('/api/todos/:id', function update(req, res) {
    * id specified in the route parameter (:id) and respond
    * with the newly updated todo.
    */
-   res.json(todos);
+    var newId;
+    var intId = parseInt(req.params.id);
+    todos.forEach(function (item) {
+       if ( item._id === intId ){
+         newId = item;
+       }
+    });
+    newId.task = req.body.task;
+    newId.description = req.body.description;
+
+    res.status(200).json(newId);
 });
 
 app.delete('/api/todos/:id', function destroy(req, res) {
@@ -98,7 +106,17 @@ app.delete('/api/todos/:id', function destroy(req, res) {
    * id specified in the route parameter (:id) and respond
    * with success.
    */
-   //res.query.id(todos);
+   var delId; // I'm really good at really bad variable names
+   var newId;
+   var intId = parseInt(req.params.id);
+   todos.forEach(function (item) {
+      if ( item._id === intId ){
+        newId = item;
+      }
+    });
+    delId = todos.indexOf(newId );
+    todos.splice(delId,1);
+    res.json(newId);
 });
 
 /**********
