@@ -57,7 +57,7 @@ By the end of this assignment you'll hopefully see this glorious output:
          ✓ should respond with status 200
          ✓ should respond with a JSON object
          ✓ should respond with a JSON object containing a list of todos
-         ✓ todo objects should have properities: _id, description, task
+         ✓ todo objects should have properties: _id, description, task
        GET /api/todos/:id (show)
          ✓ should respond with status 200 - Success
          ✓ should respond with JSON
