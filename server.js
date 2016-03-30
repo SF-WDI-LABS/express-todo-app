@@ -86,8 +86,8 @@ app.post('/api/todos', function create(req, res) {
   res.json(newTodo);  // responds to the client with new object
 });
 */
-app.get('/api/todos/:id', function show(req, res) {
-  var id = parseInt(req.params.id);
+app.get('/api/todos/:id', function show(req, res) {  // didnt really understand much of this solution during class.
+  var id = parseInt(req.params.id); // stores what we need in id
    console.log(id);
    var theRightOne;
    return todo._id == id;})[0]);
