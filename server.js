@@ -91,6 +91,19 @@ app.put('/api/todos/:id', function update(req, res) {
    * id specified in the route parameter (:id) and respond
    * with the newly updated todo.
    */
+
+   var id = req.params.id;
+   var task = req.body.task;
+   var desc = req.body.description;
+   var newTask = {_id: parseInt(id), task: task, description: desc};
+
+   for(var i = 0; i < todos.length; i++){
+     if(todos[i]._id == id) {
+       todos.splice(i, 1);
+       todos.push(newTask);
+       res.json(newTask);
+     }
+   }
 });
 
 app.delete('/api/todos/:id', function destroy(req, res) {
