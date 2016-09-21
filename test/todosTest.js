@@ -367,7 +367,7 @@ describe('Todos API', function() {
 
     var actual_response = {};
     var Todo = new TodoModel;
-    var search_word = _.sample(["surf", "sperlunk", "ski"])
+    var search_word = _.sample(["Laundry", "Grocery Shopping", "Homework"])
     var updated_todo = {
       task: search_word,
       description: 'dude... ' + Math.random

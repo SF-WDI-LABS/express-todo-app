@@ -47,7 +47,15 @@ app.get('/api/todos/search', function search(req, res) {
   /* This endpoint responds with the search results from the
    * query in the request. COMPLETE THIS ENDPOINT LAST.
    */
-});
+   var taskQ = req.query.task;
+   var results = [];
+   for(var i = 0; i < todos.length; i++){
+     if(todos[i].task == taskQ) {
+       results.push(todos[i]);
+     }
+   }
+   res.json({todos: results});
+}); // this works manually in node.  Getting odd errors like task !== surf, ski, etc.
 
 app.get('/api/todos', function index(req, res) {
   res.json({todos: todos});
